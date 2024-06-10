@@ -1,0 +1,10 @@
+.gnb {
+  display: flex;
+}
+.gnb a {
+  display: block;
+  padding: 1rem;
+}
+.gnb a:hover {
+  text-decoration: underline;
+}
