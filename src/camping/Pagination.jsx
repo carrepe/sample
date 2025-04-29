@@ -89,7 +89,7 @@ const Pagination = ({ currentPage, totalPages, onPageChage }) => {
             key={page}
             className={`${css.pagePageber} ${currentPage === page ? css.active : ''}`}
             onClick={() => onPageChage(page)}
-            disabled={isPrevPageDisabled}
+            disabled={currentPage === page} // 현재 페이지인 경우만 비활성화
           >
             {page}
           </button>
