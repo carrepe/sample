@@ -1,0 +1,20 @@
+.layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+}
+.layout > * {
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.layout > ul {
+  width: 200px;
+  background-color: #dfdede;
+  height: calc(100vh - 2rem);
+}
+.layout > main {
+  background-color: #f0f0f0;
+  flex: 1;
+}

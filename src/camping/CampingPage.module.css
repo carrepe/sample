@@ -1,0 +1,19 @@
+.list {
+  margin-top: 2rem;
+}
+.list li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  border-bottom: 1px dotted #ccc;
+  padding: 1em 0;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.list li:hover {
+  transform: translateX(5px);
+}
+
+.list li p:nth-of-type(1) {
+  width: 100%;
+}
