@@ -1,12 +1,129 @@
-# React + Vite
+# 01.weather
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 핵심 기능
 
-Currently, two official plugins are available:
+- 현재 위치 및 여러 도시(서울, 홍콩, 뉴욕, 파리 등)의 날씨 정보 조회
+- 도시를 즐겨찾기에 추가/제거하는 기능
+- 즐겨찾기 목록 관리 및 표시
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 핵심 기술 스택
 
-## Expanding the ESLint configuration
+1. **React** - 사용자 인터페이스 구축
+2. **React Router** - URL 매개변수를 이용한 도시 선택 관리
+3. **TanStack Query(React Query)** - 서버 상태 관리 및 API 호출
+4. **CSS Modules** - 스타일링
+5. **LocalStorage** - 즐겨찾기 도시 정보 저장
+6. **OpenWeatherMap API** - 날씨 데이터 조회
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 주요 컴포넌트 구조
+
+- **WeatherPage**: 메인 컴포넌트로 전체 레이아웃과 상태 관리
+- **WeatherInfo**: 날씨 정보 표시 및 즐겨찾기 관련 UI
+- **FavoriteCities**: 즐겨찾기된 도시 목록 표시
+- **Button**: 재사용 가능한 버튼 컴포넌트
+
+## 데이터 흐름
+
+1. `useWeather` 커스텀 훅으로 날씨 데이터 조회
+2. URL 파라미터로 선택된 도시 정보 관리(`useSearchParams`)
+3. 즐겨찾기 추가/제거는 `useMutation` 사용
+4. 로컬 스토리지를 통한 즐겨찾기 데이터 영구 저장
+
+## 상태 관리 패턴
+
+- **React Query**를 활용한 서버 상태 관리
+  - `useQuery`로 데이터 조회 (날씨, 즐겨찾기 목록)
+  - `useMutation`으로 즐겨찾기 추가/제거 작업 처리
+- 로딩/에러 상태 처리
+- 캐싱 및 데이터 재검증 로직
+
+## 이해해야 할 핵심 개념
+
+1. **컴포넌트 구조화 및 계층화**
+   - 관심사 분리를 통한 컴포넌트 설계
+2. **React Hooks**
+   - 기본 훅(useState, useEffect)
+   - 커스텀 훅 설계 (`useWeather`, `useFavoriteCities` 등)
+3. **React Query**
+   - 데이터 패칭 및 캐싱
+   - 뮤테이션 처리
+4. **React Router**
+   - URL 파라미터를 통한 상태 관리
+5. **API 연동**
+   - OpenWeatherMap API 호출
+   - axios를 통한 HTTP 요청
+6. **데이터 지속성**
+   - localStorage를 활용한 클라이언트 측 저장소
+
+---
+
+# 02.camping
+
+# React 캠핑 정보 앱 분석: 핵심 내용 및 기술 요약
+
+추가로 제공된 파일들을 분석한 결과, 이 프로젝트는 React로 개발된 캠핑장 정보 애플리케이션으로, 이전에 분석한 날씨 앱과 유사한 구조와 기술을 사용하고 있습니다.
+
+## 핵심 기능
+
+- 캠핑장 목록 조회 및 페이지네이션
+- 캠핑장 상세 정보 모달 표시
+- 반응형 페이지네이션 UI (화면 크기에 따라 조정)
+
+## 핵심 기술 스택
+
+1. **React** - 사용자 인터페이스 구축
+2. **TanStack Query(React Query)** - 서버 상태 관리 및 API 호출
+3. **CSS Modules** - 컴포넌트별 스타일링
+4. **공공 데이터 API** - 캠핑장 정보 조회
+5. **useState, useEffect, useRef** - 상태 관리 및 라이프사이클 제어
+
+## 주요 컴포넌트 구조
+
+- **CampingPage**: 메인 컴포넌트로 캠핑장 목록 및 상태 관리
+- **DetailModal**: 캠핑장 상세 정보를 표시하는 모달 컴포넌트
+- **Pagination**: 페이지 이동 UI 컴포넌트 (반응형)
+- **useCamping**: 캠핑 데이터 조회를 위한 커스텀 훅
+
+## 데이터 흐름
+
+1. `useCamping` 커스텀 훅으로 캠핑장 데이터 조회
+2. 페이지 및 페이지당 항목 수 상태 관리
+3. 캠핑장 항목 클릭 시 상세 정보 모달 표시
+4. 페이지네이션 컴포넌트를 통한 페이지 이동
+
+## 상태 관리 패턴
+
+- **React Query** 활용한 서버 상태 관리
+  - `useQuery`로 데이터 조회 및 캐싱
+  - 페이지 정보에 따른 쿼리 키 업데이트
+- **useState**를 통한 UI 상태 관리
+  - 모달 표시 여부 (`isModalOpen`)
+  - 선택된 캠핑장 정보 (`selected`)
+  - 현재 페이지 (`currentPage`)
+
+## 고급 기능
+
+- **반응형 페이지네이션**: 화면 크기에 따라 표시되는 페이지 버튼 수 조정
+- **이벤트 쓰로틀링**: 리사이즈 이벤트에 대한 최적화
+- **모달 UI**: 오버레이 및 블러 효과가 적용된 모달 디자인
+
+## 이해해야 할 핵심 개념
+
+1. **컴포넌트 구조화**
+   - 관심사 분리에 따른 컴포넌트 설계
+   - 재사용 가능한 UI 컴포넌트 구성
+2. **React Hooks 활용**
+   - useState로 로컬 상태 관리
+   - useEffect로 화면 크기 변화 감지
+   - useRef로 타이머 참조 관리
+   - 커스텀 훅 구현 (useCamping)
+3. **React Query**
+   - 데이터 패칭 및 캐싱
+   - 쿼리 키를 통한 데이터 무효화
+4. **UI/UX 최적화**
+   - 사용자 인터랙션에 따른 상태 변화
+   - 반응형 디자인 구현
+   - 성능 최적화 (쓰로틀링)
+5. **CSS 모듈**
+   - 컴포넌트별 스타일 분리
+   - 스타일 충돌 방지
